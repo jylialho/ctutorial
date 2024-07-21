@@ -234,6 +234,26 @@ Modulate the out1 amplitude and frequency properties based on out3 data value by
 - Send message only when a valid value is received from the out3 and the out3 value crosses the control threshold
 
 #### Report printer [TODO]
+
+Print JSON compatible ASCII reports to STDOUT at specified interval.
+
+``` JSON
+{"timestamp": 1709286246830, "out1": "-4.8", "out2": "8.0", "out3": "--"}
+```
+
+- Report Interval_ms, three TCP ports, control UDP socket and report count as arguments
+- Runs until interrupted or report count reached 
+- Report count can be set as infinite -1 or a positive integer
+- Support 20 ms and 100 ms print interval
+- Three TCP ports as out1, out2 and out3
+- Millisecond timestamp
+- Data values as the original data, no conversion to numeric representation
+- No data aggregation
+- No arrays in report
+- Only report output on STDOUT
+- Timer based to provide millisecond accuracy
+- Finite report count support for testing
+
 ### client1 application [TODO]
 ### client2 application [TODO]
 ## License [TODO]

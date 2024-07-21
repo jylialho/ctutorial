@@ -111,4 +111,106 @@ int send_control_message(udp_socket udp_control_socket, control_message msg);
  */
 void close_udp_socket(udp_socket udp_control_socket);
 
+/**
+ * Sends a report to a file and multiple sockets at a specified interval.
+ *
+ * This function sends a report to a specified file and multiple sockets at a given interval.
+ *
+ * @param file The file to which the report will be sent.
+ * @param interval_ms The interval, in milliseconds, at which the report will be sent.
+ * @param sockfd_out1 The first socket file descriptor to which the report will be sent.
+ * @param sockfd_out2 The second socket file descriptor to which the report will be sent.
+ * @param sockfd_out3 The third socket file descriptor to which the report will be sent.
+ * @param udp_control_socket The UDP control socket to which the report will be sent.
+ * @param count The number of reports to be sent.
+ * @return Returns 0 on success, -1 on failure.
+ */
+int print_report(FILE *file, int interval_ms, int sockfd_out1, int sockfd_out2, int sockfd_out3, udp_socket udp_control_socket, int count);
+
+/**
+ * Parses a report line and populates the provided report_message structure.
+ *
+ * @param line The input line to parse.
+ * @param message A pointer to the report_message structure to populate.
+ * @return Returns 0 on success, or a negative value on failure.
+ */
+int parse_report_line(const char *line, report_message *message);
+
+/**
+ * Checks the timing and control of the given buffer.
+ *
+ * This function checks the timing and control of the provided buffer
+ * based on the specified interval in milliseconds.
+ *
+ * @param buffer The buffer to check.
+ * @param interval_ms The interval in milliseconds.
+ * @return Returns 0 if the timing and control are valid, otherwise returns -1.
+ */
+int check_timing_and_control(const char *buffer, long interval_ms);
+
+/**
+ * Sends periodic reports to the standard output.
+ *
+ * This function sends periodic reports to the standard output at a specified interval.
+ *
+ * @param interval_ms The interval between each report in milliseconds.
+ * @param control_enable Flag indicating whether control is enabled or not.
+ *                      If control is enabled, the function will send control messages along with the reports.
+ *                      If control is disabled, only the reports will be sent.
+ *
+ * @return Returns 0 on success, or a negative value if an error occurs.
+ */
+int report_stdout(int interval_ms, int control_enable);
+
+/**
+ * Replaces all occurrences of a specified word in a string with a new word.
+ *
+ * @param str The input string in which the replacement will be performed.
+ * @param oldWord The word to be replaced.
+ * @param newWord The new word that will replace the old word.
+ * @return A pointer to the modified string.
+ */
+char *replaceAll(const char *str, const char *oldWord, const char *newWord);
+
+/**
+ * @brief Sets up a timer with the specified interval.
+ *
+ * This function initializes a timer identified by `timer_id` with the specified `interval_ms`.
+ *
+ * @param timer_id Pointer to the timer identifier.
+ * @param interval_ms The interval in milliseconds for the timer.
+ */
+void setup_timer(timer_t *timer_id, int interval_ms);
+
+/**
+ * @brief Handles the timer signal.
+ *
+ * This function is the handler for the timer signal. It is called when the timer signal is received.
+ *
+ * @param sig The signal number.
+ * @param si A pointer to a siginfo_t structure containing information about the signal.
+ * @param uc A pointer to a ucontext_t structure containing the user context.
+ */
+void timer_handler(int sig, siginfo_t *si, void *uc);
+
+/**
+ * Formats a report in the provided report buffer and outputs the formatted report by the specified output variables.
+ *
+ * @param report_buffer   The report buffer containing the report data.
+ * @param buffer_size   The size of the buffer.
+ * @param out1          The first output variable to store the formatted report.
+ * @param out2          The second output variable to store the formatted report.
+ * @param out3          The third output variable to store the formatted report.
+ */
+void format_report(char *report_buffer, size_t buffer_size, char *out1, char *out2, char *out3);
+
+/**
+ * @brief Handles the SIGINT signal for reporting.
+ *
+ * This function is called when the SIGINT signal is received. It is responsible for handling the signal and performing the necessary actions for reporting.
+ *
+ * @param sig The signal number.
+ */
+void handle_report_sigint(int sig);
+
 #endif // PROTOCOL_H

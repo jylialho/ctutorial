@@ -133,6 +133,68 @@ void close_tcp_socket(int sockfd)
     close(sockfd);
 }
 
+void handle_report_sigint(int sig)
+{
+    // fprintf(stderr, "\nReceived SIGINT (signal %d), exit.\n", sig);
+    report_running = 0;
+}
+
+void timer_handler(int sig, siginfo_t *si, void *uc)
+{
+    timer_triggered = 1;
+    report_timestamp = current_timestamp_ms();
+}
+
+long long current_timestamp_ms()
+{
+    struct timeval te;
+    gettimeofday(&te, NULL);                                                               // get current time
+    long long milliseconds = te.tv_sec * 1000LL + (long long)(te.tv_usec + 500L) / 1000LL; // calculate milliseconds
+    return milliseconds;
+}
+
+void format_report(char *report_buffer, size_t buffer_size, char *out1, char *out2, char *out3)
+{
+    snprintf(report_buffer, buffer_size, "{\"timestamp\": %lld, \"out1\": \"%s\", \"out2\": \"%s\", \"out3\": \"%s\"}",
+             report_timestamp, out1, out2, out3);
+}
+
+void setup_timer(timer_t *timer_id, int interval_ms)
+{
+    struct sigevent sev;
+    struct sigaction sa;
+    struct itimerspec its;
+
+    sa.sa_flags = SA_SIGINFO;
+    sa.sa_sigaction = timer_handler;
+    sigemptyset(&sa.sa_mask);
+    if (sigaction(SIGRTMIN, &sa, NULL) == -1)
+    {
+        // perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+
+    sev.sigev_notify = SIGEV_SIGNAL;
+    sev.sigev_signo = SIGRTMIN;
+    sev.sigev_value.sival_ptr = timer_id;
+    if (timer_create(CLOCK_REALTIME, &sev, timer_id) == -1)
+    {
+        // perror("timer_create");
+        exit(EXIT_FAILURE);
+    }
+
+    its.it_value.tv_sec = 0;
+    its.it_value.tv_nsec = interval_ms * 1000000; // interval_ms in ms
+    its.it_interval.tv_sec = 0;
+    its.it_interval.tv_nsec = interval_ms * 1000000; // interval_ms in ms
+
+    if (timer_settime(*timer_id, 0, &its, NULL) == -1)
+    {
+        // perror("timer_settime");
+        exit(EXIT_FAILURE);
+    }
+}
+
 udp_socket open_udp_control_socket(int control_udp_port)
 {
     udp_socket new_udp_socket;
@@ -162,4 +224,109 @@ int send_control_message(udp_socket udp_control_socket, control_message msg)
 void close_udp_socket(udp_socket udp_control_socket)
 {
     close(udp_control_socket.sockfd);
+}
+
+char *replaceAll(const char *str, const char *oldWord, const char *newWord)
+{
+    char *result;
+    int i, cnt = 0;
+    int newWlen = strlen(newWord);
+    int oldWlen = strlen(oldWord);
+
+    // Counting the number of times old word occur in the string
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        if (strstr(&str[i], oldWord) == &str[i])
+        {
+            cnt++;
+            i += oldWlen - 1;
+        }
+    }
+
+    // Making new string of enough length
+    result = (char *)malloc(i + cnt * (newWlen - oldWlen) + 1);
+
+    i = 0;
+    while (*str)
+    {
+        // Compare the substring with the result
+        if (strstr(str, oldWord) == str)
+        {
+            strcpy(&result[i], newWord);
+            i += newWlen;
+            str += oldWlen;
+        }
+        else
+            result[i++] = *str++;
+    }
+
+    result[i] = '\0';
+    return result;
+}
+
+int parse_report_line(const char *line, report_message *message)
+{
+    char *line_float = replaceAll(line, "--", "nan");
+    return sscanf(line_float, "{\"timestamp\": %lld, \"out1\": \"%f\", \"out2\": \"%f\", \"out3\": \"%f\"}",
+                  &message->timestamp, &message->out1, &message->out2, &message->out3) == 4;
+}
+
+int print_report(FILE *file, int interval_ms, int sockfd_out1, int sockfd_out2, int sockfd_out3, udp_socket udp_control_socket, int count)
+{
+    signal(SIGINT, handle_report_sigint);
+
+    timer_t timer_id;
+    setup_timer(&timer_id, interval_ms);
+
+    char buffer1[DATA_SIZE], buffer2[DATA_SIZE], buffer3[DATA_SIZE];
+    char report_buffer[REPORT_BUFFER_SIZE];
+
+    int first_call = 1;
+
+    double previous_out3_value = -DBL_MAX; // Negative max as initial value
+
+    while (report_running)
+    {
+        if (timer_triggered)
+        {
+            timer_triggered = 0;
+            read_tcp_last_line(sockfd_out1, buffer1, sizeof(buffer1));
+            read_tcp_last_line(sockfd_out2, buffer2, sizeof(buffer2));
+            read_tcp_last_line(sockfd_out3, buffer3, sizeof(buffer3));
+            if (first_call)
+            {
+                first_call = 0;
+            }
+            else
+            {
+                if (count > 0)
+                    count--;
+                if (count == 0)
+                    break; // Done
+                format_report(report_buffer, sizeof(report_buffer), buffer1, buffer2, buffer3);
+                fprintf(file, "%s\n", report_buffer);
+            }
+
+            // Send control message only if port defined and out3 value crosses threshold
+            if ((strcmp(buffer3, "--") != 0) && (udp_control_socket.sockfd > 0))
+            {
+                double out3_value = atof(buffer3);
+                if (previous_out3_value < 3.0 && out3_value >= 3.0)
+                {
+                    // TODO missing error handling
+                    send_control_message(udp_control_socket, ctrl_msg_o3h_f1hz);
+                    send_control_message(udp_control_socket, ctrl_msg_o3h_a8k);
+                }
+                else if (previous_out3_value >= 3.0 && out3_value < 3.0)
+                {
+                    send_control_message(udp_control_socket, ctrl_msg_o3l_f2hz);
+                    send_control_message(udp_control_socket, ctrl_msg_o3l_a4k);
+                }
+                previous_out3_value = out3_value;
+            }
+        }
+        pause(); // Wait for signals
+    }
+    timer_delete(timer_id);
+    return 0;
 }
