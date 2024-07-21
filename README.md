@@ -21,6 +21,21 @@ Jani Yli-Alho
 
 ### Task 2 results [TODO]
 #### Control protocol [TODO]
+
+The control messages are based on following observations from the probing and analysis of the assignment test server:
+
+| port | quantity      | object | property  | scaling  | default       | at output    |
+| ---- | ------------- | ------ | --------- | -------- | ------------- | ------------ |
+| 4001 | enabled       | 1      | 14        | -        | 1             |              |
+| 4001 | frequency     | 1      | 255       | * 1000   | 500 mHz       | 0.5 Hz sine  |
+| 4001 | amplitude     | 1      | 170       | * 1000   | 5000          | -5.0 - 5.0   |
+| 4002 | enabled       | 2      | 14        | -        | 1             |              |
+| 4002 | frequency     | 2      | 255       | * 1000   | 250 mHz       | 4 s triangle |
+| 4002 | amplitude     | 2      | 170       | * 1000   | 5000          | 0 - 5        |
+| 4003 | enabled       | 3      | 14        | -        | 1             |              |
+| 4003 | min_duration  | 3      | 42        |  ms      | 1000 ms       | 1 s 0.0      |
+| 4003 | max_duration  | 3      | 43        |  ms      | 5000 ms       | 5 s 5.0      |
+
 ## Background
 
 This project is based on an anonymous project assignment and open source C tools. Some information of the original assignment was requested not to be published and has been undisclosed.
