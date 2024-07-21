@@ -258,10 +258,10 @@ The Doxygen generator configuration is found from [Doxyfile](Doxyfile).
 
 Generate source documentation to [docs/html/index.html](docs/html/index.html) with:
 
-´´´ bash
+``` bash
 doxygen Doxyfile
 ...
-´´´
+```
 
 ### Protocol module
 
