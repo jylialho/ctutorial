@@ -208,7 +208,10 @@ doxygen Doxyfile
 ### Protocol module [TODO]
 
 The protocol module provides the data client, report printer and a property controller features.
-#### Data client [TODO]
+
+Also utility functions for validation and to support testing have been implemented.
+
+#### Data client
 
 Read a TCP port.
 
@@ -217,7 +220,7 @@ Read a TCP port.
 - Non-blocking socket read for asynchronous operation
 - Read socket buffer empty at end of receive time window
 
-#### Property controller [TODO]
+#### Property controller
 
 Modulate the out1 amplitude and frequency properties based on out3 data value by sending control messages to UDP port 4000.
 
@@ -233,7 +236,7 @@ Modulate the out1 amplitude and frequency properties based on out3 data value by
 - When out3 < 3.0, set object out1 properties frequency to 2 Hz and amplitude to 4000
 - Send message only when a valid value is received from the out3 and the out3 value crosses the control threshold
 
-#### Report printer [TODO]
+#### Report printer
 
 Print JSON compatible ASCII reports to STDOUT at specified interval.
 

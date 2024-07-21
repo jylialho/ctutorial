@@ -28,6 +28,43 @@ control_message ctrl_msg_o3l_a4k = {CONTROL_OPERATION_WRITE,
                                     CONTROL_OBJECT_OUT1_PROPERTY_AMPLITUDE_INDEX,
                                     CONTROL_OBJECT_OUT1_PROPERTY_AMPLITUDE_4000};
 
+
+// Global variable for reporting SIGINT
+volatile int report_running = 1;
+
+// Global variable for timer signal
+volatile int timer_triggered = 0;
+
+// Global variable for report timestamp
+long long report_timestamp;
+
+int report_stdout(int interval_ms, int control_enable)
+{
+    // Setup TCP sockets
+    int sockfd_out1 = connect_to_tcp_port(TCP_PORT_OUT1);
+    int sockfd_out2 = connect_to_tcp_port(TCP_PORT_OUT2);
+    int sockfd_out3 = connect_to_tcp_port(TCP_PORT_OUT3);
+
+    // UDP Control enable
+    udp_socket udp_control_socket;
+    if (control_enable > 0)
+    {
+        udp_control_socket = open_udp_control_socket(CONTROL_UDP_PORT);
+    }
+    else
+    {
+        udp_control_socket.sockfd = -1;
+    }
+    // report with 20 ms interval, terminate with SIGINT
+    int result = print_report(stdout, interval_ms, sockfd_out1, sockfd_out2, sockfd_out3, udp_control_socket, REPORT_COUNT_UNLIMITED);
+    // Close sockets
+    close_tcp_socket(sockfd_out1);
+    close_tcp_socket(sockfd_out2);
+    close_tcp_socket(sockfd_out3);
+    close_udp_socket(udp_control_socket);
+    return result;
+}
+
 int connect_to_tcp_port(int port)
 {
     int sockfd;
@@ -194,6 +231,77 @@ void setup_timer(timer_t *timer_id, int interval_ms)
         exit(EXIT_FAILURE);
     }
 }
+
+int check_timing_and_control(const char *buffer, long interval_ms)
+{
+    report_message report_messages[REPORT_COUNT_100];
+    int report_count = 0;
+    char *line;
+    char buffer_copy[REPORT_BUFFER_SIZE];
+
+    // Copy the buffer to a modifiable string
+    strncpy(buffer_copy, buffer, sizeof(buffer_copy));
+    buffer_copy[sizeof(buffer_copy) - 1] = '\0';
+
+    // Split the buffer into lines and parse each line
+    line = strtok(buffer_copy, "\n");
+    while (line != NULL)
+    {
+        if (parse_report_line(line, &report_messages[report_count]))
+        {
+            report_count++;
+        }
+        line = strtok(NULL, "\n");
+    }
+
+    // Variables to track the state of out3
+    int out3_is_5 = 0;
+    int out3_is_0 = 0;
+
+    // Condition initialization
+    int out1_control_effect_f1a8_met = 0;
+    int out1_control_effect_f2a4_met = 1;
+    int timing_met = 1;
+
+    // Time between consequent reports
+    long long report_interval_ms = 0;
+
+    // Check the conditions from the reports
+    for (int i = 0; i < report_count - CONTROL_PROPAGATION_DELAY; i++)
+    {
+        report_interval_ms = report_messages[i + 1].timestamp;                  // t1
+        report_interval_ms = report_interval_ms - report_messages[i].timestamp; // t0
+        if ((report_interval_ms > interval_ms + 10) || (report_interval_ms < interval_ms - 10))
+        {
+            timing_met = 0;
+            printf("%lld count: %d interval: %ld report: %lld i: %d t1: %lld t0: %lld\n", current_timestamp_ms(), report_count, interval_ms, report_interval_ms, i, report_messages[i + 1].timestamp, report_messages[i].timestamp);
+        }
+
+        if (report_messages[i].out3 == 5.0)
+        {
+            out3_is_5 = 1;
+            out3_is_0 = 0;
+        }
+        else if (report_messages[i].out3 == 0.0)
+        {
+            out3_is_0 = 1;
+            out3_is_5 = 0;
+        }
+        // default amplitude is 5.0, expecting to see larger output when out3 is at 5
+        if (out3_is_5 && ((report_messages[i + CONTROL_PROPAGATION_DELAY].out1 > 5.0) || (report_messages[i + CONTROL_PROPAGATION_DELAY].out1 < -5.0))) 
+        {
+            out1_control_effect_f1a8_met = 1;
+        }
+        // default amplitude is 5.0, not expecting to see larger output when out3 is at 0
+        if (out3_is_0 && ((report_messages[i + CONTROL_PROPAGATION_DELAY].out1 > 5.0) || (report_messages[i + CONTROL_PROPAGATION_DELAY].out1 < -5.0))) // default amplitude is 5.0
+        {
+            out1_control_effect_f2a4_met = 0;
+        }
+    }
+    printf("%lld report timing met: %d out1 control effect f1a8 met: %d out1 control effect f2a4 met: %d\n", current_timestamp_ms(), timing_met, out1_control_effect_f1a8_met, out1_control_effect_f2a4_met);
+    return (timing_met && out1_control_effect_f1a8_met && out1_control_effect_f2a4_met) ? 0 : -1;
+}
+
 
 udp_socket open_udp_control_socket(int control_udp_port)
 {

@@ -6,6 +6,7 @@
  * The protocol module is responsible for defining the protocols and data structures
  * used by the application.
  */
+#define _POSIX_C_SOURCE 200809L // clock_gettime
 #ifndef PROTOCOL_H
 #define PROTOCOL_H
 
@@ -27,9 +28,16 @@
 #define TCP_PORT_OUT1 4001
 #define TCP_PORT_OUT2 4002
 #define TCP_PORT_OUT3 4003
+#define REPORT_COUNT_100 100
+#define REPORT_COUNT_UNLIMITED -1
+#define REPORT_BUFFER_SIZE 32768
+#define REPORT_INTERVAL_100MS 100
+#define REPORT_INTERVAL_20MS 20
 #define PROTOCOL_BUFFER_SIZE 1024
 #define DATA_SIZE 1024
 #define CONTROL_UDP_PORT 4000
+#define VALID_OUT1_DATA_MAX 8.0
+#define VALID_OUT1_DATA_MIN -8.0
 #define CONTROL_DISABLED 0
 #define CONTROL_ENABLED 1
 #define CONTROL_PROPAGATION_DELAY 1
@@ -59,6 +67,22 @@ typedef struct {
     int sockfd;
     struct sockaddr_in servaddr;
 } udp_socket;
+
+// Report message with timestamp and 3 float values
+typedef struct
+{
+    long long timestamp;
+    float out1;
+    float out2;
+    float out3;
+} report_message;
+
+/**
+ * Returns the current timestamp in epoch milliseconds.
+ *
+ * @return The current timestamp in epoch milliseconds.
+ */
+long long current_timestamp_ms();
 
 /**
  * Connects to a TCP port.
