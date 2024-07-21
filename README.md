@@ -209,6 +209,14 @@ doxygen Doxyfile
 
 The protocol module provides the data client, report printer and a property controller features.
 #### Data client [TODO]
+
+Read a TCP port.
+
+- Linefeed \n character 0x10 separates the values in the TCP stream
+- If no data available, return "--" as data value
+- Non-blocking socket read for asynchronous operation
+- Read socket buffer empty at end of receive time window
+
 #### Property controller [TODO]
 #### Report printer [TODO]
 ### client1 application [TODO]
