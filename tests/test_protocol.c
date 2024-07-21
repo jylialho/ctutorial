@@ -79,7 +79,7 @@ int test_protocol_read_tcp_last_line(void)
     return 0;
 }
 
-int test_protocol_json_report(void)
+int test_protocol_print_report(void)
 {
     // setup stream capture
     char capture_buffer[REPORT_BUFFER_SIZE];
@@ -109,6 +109,6 @@ int test_protocol_json_report(void)
 int main(void)
 {
     RUN_TEST(test_protocol_read_tcp_last_line);
-    RUN_TEST(test_protocol_json_report);
+    RUN_TEST(test_protocol_print_report);
     return 0;
 }

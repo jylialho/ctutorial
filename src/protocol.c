@@ -419,18 +419,20 @@ int print_report(FILE *file, int interval_ms, int sockfd_out1, int sockfd_out2, 
             if ((strcmp(buffer3, "--") != 0) && (udp_control_socket.sockfd > 0))
             {
                 double out3_value = atof(buffer3);
-                if (previous_out3_value < 3.0 && out3_value >= 3.0)
+                if ( ((previous_out3_value == -DBL_MAX) || (previous_out3_value < 3.0)) && (out3_value >= 3.0))
                 {
                     // TODO missing error handling
                     send_control_message(udp_control_socket, ctrl_msg_o3h_f1hz);
                     send_control_message(udp_control_socket, ctrl_msg_o3h_a8k);
+                    previous_out3_value = out3_value;
                 }
-                else if (previous_out3_value >= 3.0 && out3_value < 3.0)
+                else if (((previous_out3_value == -DBL_MAX) || (previous_out3_value >= 3.0)) && out3_value < 3.0)
                 {
                     send_control_message(udp_control_socket, ctrl_msg_o3l_f2hz);
                     send_control_message(udp_control_socket, ctrl_msg_o3l_a4k);
+                    previous_out3_value = out3_value;
                 }
-                previous_out3_value = out3_value;
+                
             }
         }
         pause(); // Wait for signals

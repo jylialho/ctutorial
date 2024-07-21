@@ -7,191 +7,191 @@ gcc -Wall -g -I./src -I./tests -o bin/test_client2 tests/test_client2.c src/prot
 ./bin/test_protocol
 
 Test test_protocol_read_tcp_last_line:
-1721579522282 tests/test_protocol.c:39: try reveal bad socket at read: Assertion SUCCESS: expected -1, got -1
-1721579522533 tests/test_protocol.c:48: out1 read: Assertion SUCCESS: expected 0, got 0
-1721579522533 tests/test_protocol.c:54: out1 data range: Assertion SUCCESS: expected 0, got 0
-1721579522533 tests/test_protocol.c:65: out1 empty --: Assertion SUCCESS: expected 0, got 0
-1721579523173 1k read overhead: 140 ms
-1721579523173 tests/test_protocol.c:78: 1k read overhead performance: Assertion SUCCESS: expected 0, got 0
+1721587351943 tests/test_protocol.c:39: try reveal bad socket at read: Assertion SUCCESS: expected -1, got -1
+1721587352193 tests/test_protocol.c:48: out1 read: Assertion SUCCESS: expected 0, got 0
+1721587352193 tests/test_protocol.c:54: out1 data range: Assertion SUCCESS: expected 0, got 0
+1721587352193 tests/test_protocol.c:65: out1 empty --: Assertion SUCCESS: expected 0, got 0
+1721587352800 1k read overhead: 107 ms
+1721587352800 tests/test_protocol.c:78: 1k read overhead performance: Assertion SUCCESS: expected 0, got 0
 PASSED
 
 
-Test test_protocol_json_report:
-1721579533274 tests/test_protocol.c:102: report print: Assertion SUCCESS: expected 0, got 0
+Test test_protocol_print_report:
+1721587362900 tests/test_protocol.c:102: report print: Assertion SUCCESS: expected 0, got 0
 Captured buffer:
-{"timestamp": 1721579523374, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579523474, "out1": "-0.5", "out2": "0.0", "out3": "0.0"}
-{"timestamp": 1721579523574, "out1": "-1.4", "out2": "--", "out3": "--"}
-{"timestamp": 1721579523674, "out1": "-3.4", "out2": "-1.0", "out3": "--"}
-{"timestamp": 1721579523774, "out1": "-4.4", "out2": "--", "out3": "--"}
-{"timestamp": 1721579523874, "out1": "-4.8", "out2": "-2.0", "out3": "--"}
-{"timestamp": 1721579523974, "out1": "-5.0", "out2": "--", "out3": "0.0"}
-{"timestamp": 1721579524074, "out1": "-4.5", "out2": "-3.0", "out3": "--"}
-{"timestamp": 1721579524174, "out1": "-3.6", "out2": "--", "out3": "--"}
-{"timestamp": 1721579524274, "out1": "-2.4", "out2": "-4.0", "out3": "--"}
-{"timestamp": 1721579524374, "out1": "-1.2", "out2": "--", "out3": "--"}
-{"timestamp": 1721579524474, "out1": "0.6", "out2": "-5.0", "out3": "0.0"}
-{"timestamp": 1721579524574, "out1": "2.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579524674, "out1": "3.3", "out2": "-4.0", "out3": "--"}
-{"timestamp": 1721579524774, "out1": "4.4", "out2": "--", "out3": "--"}
-{"timestamp": 1721579524874, "out1": "4.9", "out2": "-3.0", "out3": "--"}
-{"timestamp": 1721579524974, "out1": "5.0", "out2": "--", "out3": "0.0"}
-{"timestamp": 1721579525074, "out1": "4.6", "out2": "-2.0", "out3": "--"}
-{"timestamp": 1721579525174, "out1": "3.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579525274, "out1": "2.7", "out2": "-1.0", "out3": "--"}
-{"timestamp": 1721579525374, "out1": "1.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579525474, "out1": "-0.6", "out2": "-0.0", "out3": "0.0"}
-{"timestamp": 1721579525574, "out1": "-2.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579525674, "out1": "-3.1", "out2": "1.0", "out3": "--"}
-{"timestamp": 1721579525774, "out1": "-3.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579525874, "out1": "-4.6", "out2": "2.0", "out3": "--"}
-{"timestamp": 1721579525974, "out1": "-5.0", "out2": "--", "out3": "0.0"}
-{"timestamp": 1721579526074, "out1": "-4.5", "out2": "3.0", "out3": "--"}
-{"timestamp": 1721579526174, "out1": "-4.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579526274, "out1": "-2.5", "out2": "4.0", "out3": "--"}
-{"timestamp": 1721579526374, "out1": "-0.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579526474, "out1": "0.6", "out2": "5.0", "out3": "5.0"}
-{"timestamp": 1721579526574, "out1": "5.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579526674, "out1": "7.9", "out2": "4.0", "out3": "--"}
-{"timestamp": 1721579526774, "out1": "6.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579526874, "out1": "3.4", "out2": "3.0", "out3": "--"}
-{"timestamp": 1721579526974, "out1": "-1.0", "out2": "--", "out3": "5.0"}
-{"timestamp": 1721579527074, "out1": "-5.8", "out2": "2.0", "out3": "--"}
-{"timestamp": 1721579527174, "out1": "-8.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579527274, "out1": "-6.8", "out2": "1.0", "out3": "--"}
-{"timestamp": 1721579527374, "out1": "-3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579527474, "out1": "0.5", "out2": "0.0", "out3": "5.0"}
-{"timestamp": 1721579527574, "out1": "5.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579527674, "out1": "7.9", "out2": "-1.0", "out3": "--"}
-{"timestamp": 1721579527774, "out1": "7.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579527874, "out1": "4.3", "out2": "-2.0", "out3": "--"}
-{"timestamp": 1721579527974, "out1": "-0.5", "out2": "--", "out3": "5.0"}
-{"timestamp": 1721579528074, "out1": "-4.7", "out2": "-3.0", "out3": "--"}
-{"timestamp": 1721579528174, "out1": "-7.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579528274, "out1": "-7.2", "out2": "-4.0", "out3": "--"}
-{"timestamp": 1721579528374, "out1": "-2.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579528474, "out1": "1.5", "out2": "-5.0", "out3": "5.0"}
-{"timestamp": 1721579528574, "out1": "5.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579528674, "out1": "7.2", "out2": "-4.0", "out3": "--"}
-{"timestamp": 1721579528774, "out1": "6.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579528874, "out1": "4.3", "out2": "-3.0", "out3": "--"}
-{"timestamp": 1721579528974, "out1": "-2.0", "out2": "--", "out3": "5.0"}
-{"timestamp": 1721579529074, "out1": "-6.2", "out2": "-2.0", "out3": "--"}
-{"timestamp": 1721579529174, "out1": "-8.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579529274, "out1": "-7.0", "out2": "-1.0", "out3": "--"}
-{"timestamp": 1721579529374, "out1": "-2.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579529474, "out1": "2.0", "out2": "-0.0", "out3": "5.0"}
-{"timestamp": 1721579529574, "out1": "4.3", "out2": "--", "out3": "--"}
-{"timestamp": 1721579529674, "out1": "7.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579529774, "out1": "7.2", "out2": "--", "out3": "--"}
-{"timestamp": 1721579529874, "out1": "3.4", "out2": "2.0", "out3": "--"}
-{"timestamp": 1721579529974, "out1": "0.5", "out2": "--", "out3": "5.0"}
-{"timestamp": 1721579530074, "out1": "-5.8", "out2": "3.0", "out3": "--"}
-{"timestamp": 1721579530174, "out1": "-7.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579530274, "out1": "-6.8", "out2": "4.0", "out3": "--"}
-{"timestamp": 1721579530374, "out1": "-4.7", "out2": "--", "out3": "--"}
-{"timestamp": 1721579530474, "out1": "1.5", "out2": "5.0", "out3": "5.0"}
-{"timestamp": 1721579530574, "out1": "5.5", "out2": "--", "out3": "--"}
-{"timestamp": 1721579530674, "out1": "7.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579530774, "out1": "7.2", "out2": "--", "out3": "--"}
-{"timestamp": 1721579530874, "out1": "4.3", "out2": "3.0", "out3": "--"}
-{"timestamp": 1721579530974, "out1": "-2.0", "out2": "--", "out3": "5.0"}
-{"timestamp": 1721579531074, "out1": "-5.8", "out2": "2.0", "out3": "--"}
-{"timestamp": 1721579531174, "out1": "-7.7", "out2": "--", "out3": "--"}
-{"timestamp": 1721579531274, "out1": "-7.4", "out2": "1.0", "out3": "--"}
-{"timestamp": 1721579531374, "out1": "-2.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579531474, "out1": "2.0", "out2": "0.0", "out3": "0.0"}
-{"timestamp": 1721579531574, "out1": "4.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579531674, "out1": "0.5", "out2": "-1.0", "out3": "--"}
-{"timestamp": 1721579531774, "out1": "-2.7", "out2": "--", "out3": "--"}
-{"timestamp": 1721579531874, "out1": "-2.7", "out2": "-2.0", "out3": "--"}
-{"timestamp": 1721579531974, "out1": "1.9", "out2": "--", "out3": "0.0"}
-{"timestamp": 1721579532074, "out1": "4.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532174, "out1": "1.5", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532274, "out1": "-3.6", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532374, "out1": "-3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532474, "out1": "0.0", "out2": "-5.0", "out3": "0.0"}
-{"timestamp": 1721579532574, "out1": "3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532674, "out1": "0.5", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532774, "out1": "-3.6", "out2": "--", "out3": "--"}
-{"timestamp": 1721579532874, "out1": "-2.7", "out2": "-3.0", "out3": "--"}
-{"timestamp": 1721579532974, "out1": "1.9", "out2": "--", "out3": "0.0"}
-{"timestamp": 1721579533074, "out1": "3.9", "out2": "-2.0", "out3": "--"}
-{"timestamp": 1721579533174, "out1": "0.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587353000, "out1": "1.5", "out2": "4.0", "out3": "--"}
+{"timestamp": 1721587353101, "out1": "-3.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587353200, "out1": "-3.8", "out2": "3.0", "out3": "--"}
+{"timestamp": 1721587353300, "out1": "0.5", "out2": "--", "out3": "5.0"}
+{"timestamp": 1721587353401, "out1": "-3.4", "out2": "2.0", "out3": "--"}
+{"timestamp": 1721587353500, "out1": "-6.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587353600, "out1": "-7.2", "out2": "1.0", "out3": "--"}
+{"timestamp": 1721587353701, "out1": "-5.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587353801, "out1": "-0.5", "out2": "0.0", "out3": "0.0"}
+{"timestamp": 1721587353901, "out1": "3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587354001, "out1": "2.4", "out2": "-1.0", "out3": "--"}
+{"timestamp": 1721587354101, "out1": "-2.7", "out2": "--", "out3": "--"}
+{"timestamp": 1721587354200, "out1": "-3.9", "out2": "-2.0", "out3": "--"}
+{"timestamp": 1721587354301, "out1": "1.0", "out2": "--", "out3": "0.0"}
+{"timestamp": 1721587354401, "out1": "3.8", "out2": "-3.0", "out3": "--"}
+{"timestamp": 1721587354500, "out1": "1.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587354601, "out1": "-2.4", "out2": "-4.0", "out3": "--"}
+{"timestamp": 1721587354701, "out1": "-3.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587354801, "out1": "-2.4", "out2": "-5.0", "out3": "0.0"}
+{"timestamp": 1721587354900, "out1": "3.6", "out2": "--", "out3": "--"}
+{"timestamp": 1721587355000, "out1": "2.4", "out2": "-4.0", "out3": "--"}
+{"timestamp": 1721587355101, "out1": "-3.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587355201, "out1": "-3.4", "out2": "-3.0", "out3": "--"}
+{"timestamp": 1721587355301, "out1": "0.5", "out2": "--", "out3": "0.0"}
+{"timestamp": 1721587355401, "out1": "4.0", "out2": "-2.0", "out3": "--"}
+{"timestamp": 1721587355501, "out1": "1.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587355601, "out1": "-2.4", "out2": "-1.0", "out3": "--"}
+{"timestamp": 1721587355701, "out1": "-3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587355801, "out1": "1.0", "out2": "-0.0", "out3": "5.0"}
+{"timestamp": 1721587355901, "out1": "5.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587356001, "out1": "7.7", "out2": "1.0", "out3": "--"}
+{"timestamp": 1721587356101, "out1": "7.6", "out2": "--", "out3": "--"}
+{"timestamp": 1721587356200, "out1": "5.1", "out2": "2.0", "out3": "--"}
+{"timestamp": 1721587356301, "out1": "0.0", "out2": "--", "out3": "5.0"}
+{"timestamp": 1721587356401, "out1": "-5.5", "out2": "3.0", "out3": "--"}
+{"timestamp": 1721587356501, "out1": "-7.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587356601, "out1": "-7.4", "out2": "4.0", "out3": "--"}
+{"timestamp": 1721587356701, "out1": "-5.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587356801, "out1": "0.5", "out2": "5.0", "out3": "5.0"}
+{"timestamp": 1721587356901, "out1": "5.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587357001, "out1": "7.6", "out2": "4.0", "out3": "--"}
+{"timestamp": 1721587357101, "out1": "7.7", "out2": "--", "out3": "--"}
+{"timestamp": 1721587357201, "out1": "4.7", "out2": "3.0", "out3": "--"}
+{"timestamp": 1721587357301, "out1": "-1.0", "out2": "--", "out3": "5.0"}
+{"timestamp": 1721587357401, "out1": "-4.7", "out2": "2.0", "out3": "--"}
+{"timestamp": 1721587357501, "out1": "-7.7", "out2": "--", "out3": "--"}
+{"timestamp": 1721587357601, "out1": "-7.2", "out2": "1.0", "out3": "--"}
+{"timestamp": 1721587357701, "out1": "-3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587357801, "out1": "-0.0", "out2": "0.0", "out3": "5.0"}
+{"timestamp": 1721587357901, "out1": "5.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587358001, "out1": "7.4", "out2": "-1.0", "out3": "--"}
+{"timestamp": 1721587358101, "out1": "7.2", "out2": "--", "out3": "--"}
+{"timestamp": 1721587358201, "out1": "4.3", "out2": "--", "out3": "--"}
+{"timestamp": 1721587358301, "out1": "-0.5", "out2": "--", "out3": "5.0"}
+{"timestamp": 1721587358400, "out1": "-5.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587358501, "out1": "-7.6", "out2": "--", "out3": "--"}
+{"timestamp": 1721587358601, "out1": "-7.2", "out2": "-4.0", "out3": "--"}
+{"timestamp": 1721587358701, "out1": "-3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587358801, "out1": "-0.5", "out2": "-5.0", "out3": "0.0"}
+{"timestamp": 1721587358901, "out1": "3.6", "out2": "--", "out3": "--"}
+{"timestamp": 1721587359001, "out1": "2.4", "out2": "-4.0", "out3": "--"}
+{"timestamp": 1721587359101, "out1": "-2.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587359201, "out1": "-3.6", "out2": "-3.0", "out3": "--"}
+{"timestamp": 1721587359301, "out1": "0.5", "out2": "--", "out3": "0.0"}
+{"timestamp": 1721587359401, "out1": "2.4", "out2": "-2.0", "out3": "--"}
+{"timestamp": 1721587359501, "out1": "2.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587359601, "out1": "-3.1", "out2": "-1.0", "out3": "--"}
+{"timestamp": 1721587359700, "out1": "-3.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587359800, "out1": "1.0", "out2": "-0.0", "out3": "0.0"}
+{"timestamp": 1721587359901, "out1": "3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587360001, "out1": "1.5", "out2": "1.0", "out3": "--"}
+{"timestamp": 1721587360101, "out1": "-1.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587360200, "out1": "-3.6", "out2": "2.0", "out3": "--"}
+{"timestamp": 1721587360301, "out1": "0.5", "out2": "--", "out3": "0.0"}
+{"timestamp": 1721587360401, "out1": "3.9", "out2": "3.0", "out3": "--"}
+{"timestamp": 1721587360501, "out1": "2.7", "out2": "--", "out3": "--"}
+{"timestamp": 1721587360601, "out1": "-3.1", "out2": "4.0", "out3": "--"}
+{"timestamp": 1721587360701, "out1": "-4.0", "out2": "--", "out3": "--"}
+{"timestamp": 1721587360801, "out1": "-0.0", "out2": "5.0", "out3": "0.0"}
+{"timestamp": 1721587360901, "out1": "3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587361001, "out1": "1.5", "out2": "4.0", "out3": "--"}
+{"timestamp": 1721587361101, "out1": "-2.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587361201, "out1": "-3.4", "out2": "3.0", "out3": "--"}
+{"timestamp": 1721587361300, "out1": "-0.0", "out2": "--", "out3": "0.0"}
+{"timestamp": 1721587361401, "out1": "3.8", "out2": "2.0", "out3": "--"}
+{"timestamp": 1721587361501, "out1": "2.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587361600, "out1": "-2.7", "out2": "1.0", "out3": "--"}
+{"timestamp": 1721587361701, "out1": "-3.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587361801, "out1": "-1.9", "out2": "0.0", "out3": "0.0"}
+{"timestamp": 1721587361901, "out1": "3.6", "out2": "--", "out3": "--"}
+{"timestamp": 1721587362001, "out1": "2.7", "out2": "-1.0", "out3": "--"}
+{"timestamp": 1721587362101, "out1": "-3.1", "out2": "--", "out3": "--"}
+{"timestamp": 1721587362201, "out1": "-3.6", "out2": "-2.0", "out3": "--"}
+{"timestamp": 1721587362301, "out1": "1.0", "out2": "--", "out3": "0.0"}
+{"timestamp": 1721587362401, "out1": "3.8", "out2": "-3.0", "out3": "--"}
+{"timestamp": 1721587362501, "out1": "1.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587362601, "out1": "-1.5", "out2": "-4.0", "out3": "--"}
+{"timestamp": 1721587362700, "out1": "-3.8", "out2": "--", "out3": "--"}
+{"timestamp": 1721587362801, "out1": "-0.0", "out2": "-5.0", "out3": "5.0"}
 
-1721579533274 report timing met: 1 out1 control effect f1a8 met: 1 out1 control effect f2a4 met: 1
-1721579533274 tests/test_protocol.c:105: report timing with out1 control effects: Assertion SUCCESS: expected 0, got 0
+1721587362901 report timing met: 1 out1 control effect f1a8 met: 1 out1 control effect f2a4 met: 1
+1721587362900 tests/test_protocol.c:105: report timing with out1 control effects: Assertion SUCCESS: expected 0, got 0
 PASSED
 
 ./bin/test_client1
 
 Test test_client1:
-{"timestamp": 1721579533476, "out1": "0.5", "out2": "-0.0", "out3": "0.0"}
-{"timestamp": 1721579533576, "out1": "3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579533676, "out1": "1.0", "out2": "1.0", "out3": "--"}
-{"timestamp": 1721579533776, "out1": "-3.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579533876, "out1": "-3.4", "out2": "2.0", "out3": "--"}
-{"timestamp": 1721579533976, "out1": "-1.5", "out2": "--", "out3": "0.0"}
-{"timestamp": 1721579534076, "out1": "3.1", "out2": "3.0", "out3": "--"}
-{"timestamp": 1721579534176, "out1": "0.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363102, "out1": "7.2", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363202, "out1": "4.3", "out2": "-3.0", "out3": "--"}
+{"timestamp": 1721587363302, "out1": "0.0", "out2": "--", "out3": "5.0"}
+{"timestamp": 1721587363402, "out1": "-5.5", "out2": "-2.0", "out3": "--"}
+{"timestamp": 1721587363502, "out1": "-7.7", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363602, "out1": "-7.7", "out2": "-1.0", "out3": "--"}
+{"timestamp": 1721587363702, "out1": "-4.7", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363802, "out1": "1.0", "out2": "-0.0", "out3": "5.0"}
 
 Test test_client1:
-1721579534275 tests/test_client1.c:35: check SIGINT: Assertion SUCCESS: expected 0, got 0
+1721587363902 tests/test_client1.c:35: check SIGINT: Assertion SUCCESS: expected 0, got 0
 PASSED
 
 ./bin/test_client2
 
 Test test_client2:
-{"timestamp": 1721579534317, "out1": "-4.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534337, "out1": "-3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534357, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534377, "out1": "-3.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534397, "out1": "-1.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534417, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534437, "out1": "0.0", "out2": "5.0", "out3": "5.0"}
-{"timestamp": 1721579534457, "out1": "1.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534477, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534497, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534517, "out1": "3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534537, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534557, "out1": "5.1", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534577, "out1": "5.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534597, "out1": "6.5", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534617, "out1": "7.2", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534637, "out1": "7.4", "out2": "4.0", "out3": "--"}
-{"timestamp": 1721579534657, "out1": "7.7", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534677, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534697, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534717, "out1": "7.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534737, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534757, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534777, "out1": "7.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534797, "out1": "6.2", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534817, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534837, "out1": "4.7", "out2": "3.0", "out3": "--"}
-{"timestamp": 1721579534857, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534877, "out1": "2.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534897, "out1": "2.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534917, "out1": "1.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534937, "out1": "0.5", "out2": "--", "out3": "5.0"}
-{"timestamp": 1721579534957, "out1": "-1.0", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534977, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579534997, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535017, "out1": "-3.9", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535037, "out1": "-4.7", "out2": "2.0", "out3": "--"}
-{"timestamp": 1721579535057, "out1": "-5.5", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535077, "out1": "-5.8", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535097, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535117, "out1": "-7.2", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535137, "out1": "-7.4", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535157, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535177, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535197, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535217, "out1": "--", "out2": "--", "out3": "--"}
-{"timestamp": 1721579535237, "out1": "-7.7", "out2": "1.0", "out3": "--"}
-{"timestamp": 1721579535257, "out1": "-7.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363943, "out1": "7.0", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363964, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587363983, "out1": "7.6", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364003, "out1": "7.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364023, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364043, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364064, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364084, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364103, "out1": "7.2", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364124, "out1": "7.0", "out2": "2.0", "out3": "--"}
+{"timestamp": 1721587364144, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364164, "out1": "5.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364183, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364203, "out1": "3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364224, "out1": "2.9", "out2": "--", "out3": "5.0"}
+{"timestamp": 1721587364243, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364263, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364284, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364303, "out1": "-1.5", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364324, "out1": "--", "out2": "3.0", "out3": "--"}
+{"timestamp": 1721587364343, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364364, "out1": "-4.3", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364384, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364403, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364423, "out1": "-6.2", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364443, "out1": "-6.8", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364464, "out1": "-7.2", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364484, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364503, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364523, "out1": "--", "out2": "4.0", "out3": "--"}
+{"timestamp": 1721587364543, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364564, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364583, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364603, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364623, "out1": "-6.8", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364644, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364663, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364683, "out1": "-4.3", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364703, "out1": "-3.9", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364723, "out1": "--", "out2": "5.0", "out3": "5.0"}
+{"timestamp": 1721587364744, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364763, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364784, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364804, "out1": "1.0", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364824, "out1": "--", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364843, "out1": "3.4", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364863, "out1": "4.3", "out2": "--", "out3": "--"}
+{"timestamp": 1721587364883, "out1": "4.7", "out2": "--", "out3": "--"}
 
 Test test_client2:
-1721579535277 tests/test_client2.c:35: check SIGINT: Assertion SUCCESS: expected 0, got 0
+1721587364903 tests/test_client2.c:35: check SIGINT: Assertion SUCCESS: expected 0, got 0
 PASSED
 
