@@ -49,8 +49,45 @@ git clone https://github.com/jylialho/ctutorial.git
 ```
 
 #### Development container [TODO]
-## Server container deployment [TODO]
+## Server container deployment
+
+The assignment provided a server as a undisclosed docker image and with short a port definition. For safety, as dealing with an unknown source binary, the server container shall be inspected and run in a restricted environment:
+
+``` bash
+docker load undisclosed-image
+docker network create --internal internal
+docker run --network internal undisclosed-image
+```
+
+Inspection revealed, that the image was based on a generic Alpine Linux and a Go server application. Some undisclosed clear text symbols appeared inside the server application binary.
+
 ### Analysis of the server data output [TODO]
+
+The server container provided Netcat with command nc, enabling observation of the output from data ports 4001, 4002 and 4003 directly in the container shell. The data was observed together with timestamps to determine the varying signal periods.
+
+``` sh
+nc localhost 4001 | while IFS= read -r line; do printf '%s %s\n' "$(date +'%s')" "$line"; done
+17092... 0.0
+```
+
+Also a TCP line rate_test utility was implemented to understand the rate and timing of the server TCP 4001 output:
+
+``` bash
+gcc -o utils/rate_test utils/rate_test.c
+./utils/rate_test
+Line 1: 0.030026 seconds
+Line 2: 0.030031 seconds
+Line 3: 0.040421 seconds
+Line 4: 0.029793 seconds
+Line 5: 0.010232 seconds
+Line 6: 0.009262 seconds
+Line 7: 0.040750 seconds
+Line 8: 0.009129 seconds
+Line 9: 0.010311 seconds
+Line 10: 0.020608 seconds
+...
+```
+
 ### Probing of the control property fields [TODO]
 ## Architecture
 
