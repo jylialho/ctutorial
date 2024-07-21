@@ -206,6 +206,8 @@ doxygen Doxyfile
 ´´´
 
 ### Protocol module [TODO]
+
+The protocol module provides the data client, report printer and a property controller features.
 #### Data client [TODO]
 #### Property controller [TODO]
 #### Report printer [TODO]
