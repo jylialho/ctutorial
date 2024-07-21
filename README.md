@@ -258,7 +258,17 @@ Print JSON compatible ASCII reports to STDOUT at specified interval.
 - Finite report count support for testing
 
 ### client1 application [TODO]
+
+- Report interval 100 ms
+- Property controller disabled
+- Terminate on SIGINT
+
 ### client2 application [TODO]
+
+- Report interval 20 ms
+- Property controller enabled
+- Terminate on SIGINT
+
 ## License [TODO]
 
 The project is open source and permissive MIT license was chosen for this effort to support for the open source community.
