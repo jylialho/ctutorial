@@ -9,8 +9,38 @@ Jani Yli-Alho
 - [https://github.com/jylialho](https://github.com/jylialho)
 - [https://www.linkedin.com/in/jylialho/](https://www.linkedin.com/in/jylialho/)
 
-## Assignment summary [TODO]
-### Task 1 results [TODO]
+## Assignment summary
+
+All of the recognized assignment requirements were implemented and tested functional in the given time slot. Documentation was composed to introduce the workflow in the form of a humble tutorial, in order to introduce inherent value for the effort.
+
+Emphasis has been in careful identification of the requirements, structuring the project to be maintainable and compatible with the POSIX environment.
+
+Continuous testing against the requirements was necessary to understand the requirements as a whole and achieve the requested functionality.
+
+Socket buffer handling with non-blocking I/O and ensuring timing accuracy were found to be the most challenging part of the implementation. Single process approach was considered most resource friendly.
+
+Compromises have been made on the error handling and memory management aspects, in order to fit the work in the available implementation time.
+
+Big thanks to participated people behind the high quality assignment and for the open source community for making this effort possible.
+
+I hope these results find their way to demonstrate C language concepts, and function as one sample of workspace configuration, in the open source community.
+
+On an error or an issue, please let me know,in order to improve.
+
+### Task 1 results
+
+The client1 is a C command line application that connects the TCP ports 4001, 4002 and 4003 and composes a JSON compatible ASCII report of the TCP port data.
+
+The client1 report has out1, out2 and out3 and an Unix epoch millisecond time as timestamp keys. The report value types are strings.
+
+If no data is received from a port during the report interval, the value string is "--" in the report.
+
+The client1 reporting has interval of 100 ms and with reasonable jitter in range of milliseconds on most typical multicore systems, naturally depending on host system resources consumed by other applications. The jitter can be improved by adjusting application priority or by utilizing core affinity. The report interval is based on a timer, which can be considered as a solid foundation for the timing.
+
+The client1 prints the report to the STDOUT.
+
+The client1 only the reports on the STDOUT. STDERR output has been suppressed, as it would be directed to STDOUT in typical terminal configuration.
+
 #### Server TCP port signal frequencies, amplitudes and shapes
 
 | port | name | frequency  | amplitude  | shape    | period   |
@@ -19,8 +49,19 @@ Jani Yli-Alho
 | 4002 | out2 | 0.25 Hz    | 0 - 5      | triangle | 4 s      |
 | 4003 | out3 | 0.2 - 1 Hz | 0 / 5      | binary   | 1 - 5 s  |
 
-### Task 2 results [TODO]
-#### Control protocol [TODO]
+### Task 2 results
+
+The client2 reporting functionality is according to client1, with shorter 20 ms reporting interval, and with added UDP control to modulate out1 based on out3 data.
+
+In the assignment, the frequency was represented in Hz and the control property uses mHz scale. The amplitude was assumed to represented as to be in the control property scale instead of in output scale, otherwise the task amplitude values would have been contradictory with the control protocol field size of 16 bits.
+
+A predefined control message is sent to UDP port 4000 based on out3 value changes when valid data is received during a report interval.
+
+When the out3 value crosses >= 3.0, the out1 is configured with frequency of 1 Hz by setting the frequency property 255 with value 1000 mHz, and by setting the amplitude property 170 with value 8000.
+
+When the out3 crosses < 3.0, the out1 is configured with frequency of 2 Hz by setting the frequency property 255 with value 2000 mHz, and by setting the amplitude property 170 with value 4000.
+
+#### Control protocol
 
 The control messages are based on following observations from the probing and analysis of the assignment test server:
 
@@ -70,8 +111,7 @@ sudo apt-get install graphviz
 git clone https://github.com/jylialho/ctutorial.git
 ```
 
-#### Development container [TODO]
-
+#### Development container
 A development container configuration was added to support containerized development environment and Github Codespaces for improved project accessibility: [https://code.visualstudio.com/docs/devcontainers/containers](https://code.visualstudio.com/docs/devcontainers/containers)
 
 ## Server container deployment
@@ -182,7 +222,7 @@ And with client2:
 {"timestamp": ...}
 ```
 
-#### Container configuration [TODO]
+#### Container configuration
 
 Added  [Dockerfile](Dockerfile) and [docker-compose.yml](docker-compose.yml) templates to support application deployment on container environments:
 
@@ -198,7 +238,7 @@ And to see the undisclosed server logs:
 docker-compose logs -f undisclosed_server
 ```
 
-## Implementation [TODO]
+## Implementation
 
 The client1 and client2 applications have common functionality, which has been organized as the protocol module to be used by the client applications.
 
@@ -210,7 +250,7 @@ The functionality is tested by assertions on the function results and by windowi
 
 A simple single header unit test mechanism has been included.
 
-### Documentation [TODO]
+### Documentation
 
 As the project consist of several source files, an automated source documentation generator was considered practical.
 
@@ -223,7 +263,7 @@ doxygen Doxyfile
 ...
 ´´´
 
-### Protocol module [TODO]
+### Protocol module
 
 The protocol module provides the data client, report printer and a property controller features.
 
@@ -275,19 +315,19 @@ Print JSON compatible ASCII reports to STDOUT at specified interval.
 - Timer based to provide millisecond accuracy
 - Finite report count support for testing
 
-### client1 application [TODO]
+### client1 application
 
 - Report interval 100 ms
 - Property controller disabled
 - Terminate on SIGINT
 
-### client2 application [TODO]
+### client2 application
 
 - Report interval 20 ms
 - Property controller enabled
 - Terminate on SIGINT
 
-## License [TODO]
+## License
 
 The project is open source and permissive MIT license was chosen for this effort to support for the open source community.
 
