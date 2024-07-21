@@ -95,7 +95,24 @@ Line 10: 0.020608 seconds
 ...
 ```
 
-### Probing of the control property fields [TODO]
+### Probing of the control property fields
+
+The control protocol operation, object, property, and value control fields were introduced without definition for the object and property fields, which requires some probing to figure out the necessary property indexes.
+
+The server outputs control responses to stdout, appearing in the server logs, which gave an opportunity find out the property fields with a simple shell script: [utils/probe_properties.sh](utils/probe_properties.sh)
+
+The properties were found by querying a property index range of 0 to 255, the start and first byte of the 16 bit property range, by simply observing if the property is found from the logs.
+
+The set control properties correlate with the server data output values.
+
+The frequency control index 255 property appeared to be set in mHz, correlating with observed cycle durations in the terminal, 500 mHz for 4001 and 250 mHz for 4002.
+
+For 4003 there was no frequency property found in probed range 0-255. The were index 42 min_duration and index 43 max_duration properties, which correlated with the output 4003 observed binary waveform with varying signal period range.
+
+The amplitude property control index 170 appeared to be the output amplitude multiplied by 1000, correlating with observed positive and negative amplitude in the terminal 4001, 4002.
+
+For 4003 there was no amplitude property found in probed range of 0-255.
+
 ## Architecture
 
 The implementation proposal is to split the project into a protocol module and into two assignment task specific client applications, the client1 and the client2.
