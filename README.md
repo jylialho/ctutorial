@@ -212,3 +212,9 @@ doxygen Doxyfile
 ### client1 application [TODO]
 ### client2 application [TODO]
 ## License [TODO]
+
+The project is open source and permissive MIT license was chosen for this effort to support for the open source community.
+
+Please let me know, if there is an issue with the license, missing attribution or recognition of contribution.
+
+See [LICENSE](LICENSE)
