@@ -1,0 +1,17 @@
+{
+    "makefile.buildLog": "",
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+    "files.associations": {
+        "protocol.h": "c",
+        "socket.h": "c",
+        "inet.h": "c",
+        "in.h": "c",
+        "unistd.h": "c",
+        "errno.h": "c",
+        "stdio.h": "c",
+        "client2.h": "c",
+        "client.h": "c"
+    },
+    "makefile.makefilePath": "Makefile",
+    "makefile.phonyOnlyTargets": true
+}
