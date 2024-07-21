@@ -43,6 +43,8 @@ In the workspace target terminal, the package lists have been updated, installed
 ``` bash
 sudo apt update
 sudo apt install build-essential
+sudo apt-get install doxygen
+sudo apt-get install graphviz
 git clone https://github.com/jylialho/ctutorial.git
 ```
 
