@@ -103,7 +103,30 @@ And with client2:
 
 #### Container configuration [TODO]
 ## Implementation [TODO]
+
+The client1 and client2 applications have common functionality, which has been organized as the protocol module to be used by the client applications.
+
+The protocol module provides functionality for data access, timing, reporting and control.
+
+The functionality is tested by assertions on the function results and by windowing, comparing and inspecting specific expected outputs.
+
+### Testing
+
+A simple single header unit test mechanism has been included.
+
 ### Documentation [TODO]
+
+As the project consist of several source files, an automated source documentation generator was considered practical.
+
+The Doxygen generator configuration is found from [Doxyfile](Doxyfile).
+
+Generate source documentation to [docs/html/index.html](docs/html/index.html) with:
+
+´´´ bash
+doxygen Doxyfile
+...
+´´´
+
 ### Protocol module [TODO]
 #### Data client [TODO]
 #### Property controller [TODO]
