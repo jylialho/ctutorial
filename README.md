@@ -11,7 +11,14 @@ Jani Yli-Alho
 
 ## Assignment summary [TODO]
 ### Task 1 results [TODO]
-#### Server TCP port signal frequencies, amplitudes and shapes [TODO]
+#### Server TCP port signal frequencies, amplitudes and shapes
+
+| port | name | frequency  | amplitude  | shape    | period   |
+| ---- | ---- | ---------- | ---------- | -------- | -------- |
+| 4001 | out1 | 0.5 Hz     | -5.0 - 5.0 | sine     | 2 s      |
+| 4002 | out2 | 0.25 Hz    | 0 - 5      | triangle | 4 s      |
+| 4003 | out3 | 0.2 - 1 Hz | 0 / 5      | binary   | 1 - 5 s  |
+
 ### Task 2 results [TODO]
 #### Control protocol [TODO]
 ## Background
@@ -61,7 +68,7 @@ docker run --network internal undisclosed-image
 
 Inspection revealed, that the image was based on a generic Alpine Linux and a Go server application. Some undisclosed clear text symbols appeared inside the server application binary.
 
-### Analysis of the server data output [TODO]
+### Analysis of the server data output
 
 The server container provided Netcat with command nc, enabling observation of the output from data ports 4001, 4002 and 4003 directly in the container shell. The data was observed together with timestamps to determine the varying signal periods.
 
