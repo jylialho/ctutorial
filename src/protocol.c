@@ -3,6 +3,31 @@
  * @brief This file contains the implementation of the protocol module.
  */
 #include "protocol.h"
+
+// Control message 1 Hz frequency
+control_message ctrl_msg_o3h_f1hz = {CONTROL_OPERATION_WRITE,
+                                     CONTROL_OBJECT_OUT1,
+                                     CONTROL_OBJECT_OUT1_PROPERTY_FREQUENCY_INDEX,
+                                     CONTROL_OBJECT_OUT1_PROPERTY_FREQUENCY_1_HZ};
+
+// Control message 8000 amplitude
+control_message ctrl_msg_o3h_a8k = {CONTROL_OPERATION_WRITE,
+                                    CONTROL_OBJECT_OUT1,
+                                    CONTROL_OBJECT_OUT1_PROPERTY_AMPLITUDE_INDEX,
+                                    CONTROL_OBJECT_OUT1_PROPERTY_AMPLITUDE_8000};
+
+// Control message 2 Hz frequency
+control_message ctrl_msg_o3l_f2hz = {CONTROL_OPERATION_WRITE,
+                                     CONTROL_OBJECT_OUT1,
+                                     CONTROL_OBJECT_OUT1_PROPERTY_FREQUENCY_INDEX,
+                                     CONTROL_OBJECT_OUT1_PROPERTY_FREQUENCY_2_HZ};
+
+// Control message 4000 amplitude
+control_message ctrl_msg_o3l_a4k = {CONTROL_OPERATION_WRITE,
+                                    CONTROL_OBJECT_OUT1,
+                                    CONTROL_OBJECT_OUT1_PROPERTY_AMPLITUDE_INDEX,
+                                    CONTROL_OBJECT_OUT1_PROPERTY_AMPLITUDE_4000};
+
 int connect_to_tcp_port(int port)
 {
     int sockfd;
@@ -106,4 +131,35 @@ int read_tcp_last_line(int sockfd, char *buf, int bufsize)
 void close_tcp_socket(int sockfd)
 {
     close(sockfd);
+}
+
+udp_socket open_udp_control_socket(int control_udp_port)
+{
+    udp_socket new_udp_socket;
+    new_udp_socket.sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (new_udp_socket.sockfd < 0)
+    {
+        // perror("socket creation failed");
+        exit(EXIT_FAILURE);
+    }
+    memset(&new_udp_socket.servaddr, 0, sizeof(new_udp_socket.servaddr));
+    new_udp_socket.servaddr.sin_family = AF_INET;
+    new_udp_socket.servaddr.sin_port = htons(control_udp_port);
+    new_udp_socket.servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    return new_udp_socket;
+}
+
+int send_control_message(udp_socket udp_control_socket, control_message msg)
+{
+    // Convert fields to big-endian
+    msg.operation = htons(msg.operation);
+    msg.object = htons(msg.object);
+    msg.property = htons(msg.property);
+    msg.value = htons(msg.value);
+    return sendto(udp_control_socket.sockfd, &msg, sizeof(msg), 0, (const struct sockaddr *)&udp_control_socket.servaddr, sizeof(udp_control_socket.servaddr));
+}
+
+void close_udp_socket(udp_socket udp_control_socket)
+{
+    close(udp_control_socket.sockfd);
 }

@@ -218,6 +218,21 @@ Read a TCP port.
 - Read socket buffer empty at end of receive time window
 
 #### Property controller [TODO]
+
+Modulate the out1 amplitude and frequency properties based on out3 data value by sending control messages to UDP port 4000.
+
+- Control UDP port 4000
+- Control message fields are operation, object, property and value
+- Control message fields are unsigned 16 bit integer
+- Control message byte order is big-endian
+- Frequency control property identifier is 255
+- Frequency control property is scaled as mHz, e.g. property value 500 mHz results in 0.5 Hz output frequency
+- Amplitude control property identifier is 170
+- Amplitude control property property is multiplied by 1000, e.g. property value 1000 results in 1.0 output amplitude
+- When out3 >= 3.0, set object out1 properties frequency to 1 Hz and amplitude to 8000
+- When out3 < 3.0, set object out1 properties frequency to 2 Hz and amplitude to 4000
+- Send message only when a valid value is received from the out3 and the out3 value crosses the control threshold
+
 #### Report printer [TODO]
 ### client1 application [TODO]
 ### client2 application [TODO]
