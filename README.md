@@ -50,8 +50,20 @@ git clone https://github.com/jylialho/ctutorial.git
 ## Server container deployment [TODO]
 ### Analysis of the server data output [TODO]
 ### Probing of the control property fields [TODO]
-## Architecture [TODO]
-## Workflow [TODO]
+## Architecture
+
+The implementation proposal is to split the project into a protocol module and into two assignment task specific client applications, the client1 and the client2.
+
+The recognized common requirements from the assignment shall be introduced as features for the protocol and unique requirements as features for each of the client applications.
+
+## Workflow
+
+For each feature, a git branch is created for the implementation of a feature.
+
+For each applicable feature, tests are introduced to validate correct operation.
+
+Once a feature is implemented and tested, the feature branch is merged into the main branch and the main branch documentation updated.
+
 ### Build configuration [TODO]
 ### Run configuration [TODO]
 #### Container configuration [TODO]
