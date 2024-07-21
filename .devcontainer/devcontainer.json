@@ -1,0 +1,19 @@
+{
+    "name": "C Development Container for ctutorial",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-vscode.cpptools",
+          "ms-azuretools.vscode-docker"
+        ]
+      }
+    },
+    "mounts": [
+      "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+    ],
+    "remoteUser": "root"
+  }
+  

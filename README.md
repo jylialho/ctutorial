@@ -71,6 +71,9 @@ git clone https://github.com/jylialho/ctutorial.git
 ```
 
 #### Development container [TODO]
+
+A development container configuration was added to support containerized development environment and Github Codespaces for improved project accessibility: [https://code.visualstudio.com/docs/devcontainers/containers](https://code.visualstudio.com/docs/devcontainers/containers)
+
 ## Server container deployment
 
 The assignment provided a server as a undisclosed docker image and with short a port definition. For safety, as dealing with an unknown source binary, the server container shall be inspected and run in a restricted environment:
