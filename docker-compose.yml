@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ctutorial:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ctutorial_container
+    networks:
+      - internal
+      - hostnet
+    command: /bin/bash -c "make"
+    network_mode: "host"
+
+  undisclosed_server:
+    image: undisclosed_server_image
+    container_name: undisclosed_server_container
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+  hostnet:
+    external: true
+    name: host

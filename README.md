@@ -180,6 +180,21 @@ And with client2:
 ```
 
 #### Container configuration [TODO]
+
+Added  [Dockerfile](Dockerfile) and [docker-compose.yml](docker-compose.yml) templates to support application deployment on container environments:
+
+``` bash
+docker network create internal
+docker-compose up --build
+docker-compose logs -f ctutorial
+```
+
+And to see the undisclosed server logs:
+
+``` bash
+docker-compose logs -f undisclosed_server
+```
+
 ## Implementation [TODO]
 
 The client1 and client2 applications have common functionality, which has been organized as the protocol module to be used by the client applications.
