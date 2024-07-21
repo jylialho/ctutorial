@@ -64,8 +64,43 @@ For each applicable feature, tests are introduced to validate correct operation.
 
 Once a feature is implemented and tested, the feature branch is merged into the main branch and the main branch documentation updated.
 
-### Build configuration [TODO]
-### Run configuration [TODO]
+### Build configuration
+
+The [Makefile](Makefile) has been setup to build the client1 and client2 binaries and the binaries for the tests. The builds and tests can be run with:
+
+``` bash
+make
+```
+
+The application binaries can be built explicitly with:
+
+``` bash
+make client1
+make client2
+```
+
+And the binaries cleaned with:
+
+``` bash
+make clean
+```
+
+### Run configuration
+
+The applications can be run as ordinary command line applications after they are built. The applications provide the JSON reports to stdout, with client1:
+
+``` bash
+./client1
+{"timestamp": ...}
+```
+
+And with client2:
+
+``` bash
+./client2
+{"timestamp": ...}
+```
+
 #### Container configuration [TODO]
 ## Implementation [TODO]
 ### Documentation [TODO]
